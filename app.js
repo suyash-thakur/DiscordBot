@@ -14,6 +14,7 @@ const threadCount = +process.argv[2] || 2;
 const threads = new Set();
 const rp = require('request-promise');
 const cheerio = require('cheerio');
+const  googleIt = require('google-it')
 var querystring = require('querystring');
 const baseURL = 'https://www.google.com/search?q=';
 client.login(process.env.BOT_TOKEN);
@@ -61,9 +62,9 @@ client.on('message', msg => {
   if (msg.content.split(" ")[0] == '!google') {
     var url = baseURL + msg.content.split(" ")[1];
     var linkSel = 'h3.r a'
-var descSel = 'div.s'
-var itemSel = 'div.g'
-var nextSel = 'td.b a span'
+    var descSel = 'div.s'
+    var itemSel = 'div.g'
+    var nextSel = 'td.b a span'
     rp(url).then(function (html) {
 
       var $ = cheerio.load(html)
@@ -100,7 +101,17 @@ var nextSel = 'td.b a span'
       console.log(err);
     msg.reply('Error Finding Search Result');
 
-  });
+    });
+    
+    googleIt({ 'query': msg.content.split(" ")[1] }).then(results => {
+      console.log(results);
+      // access to results object here
+      msg.reply(results);
+
+      
+    }).catch(e => {
+      // any possible errors that might have occurred (like no Internet connection)
+    })
   }
   for (let worker of threads) {
     worker.on('error', (err) => { throw err; });
