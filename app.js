@@ -93,24 +93,29 @@ client.on('message', msg => {
         item.description = $(descElem).text()
 
         res.links.push(item);
-        console.log(res);
+    
       });
-      console.log(res);
 
     }).catch(function (err) {
       console.log(err);
-    msg.reply('Error Finding Search Result');
 
     });
     
     googleIt({ 'query': msg.content.split(" ")[1] }).then(results => {
-      console.log(results);
+      console.log("results", results);
+      msg.reply(results[0].title);
+      msg.reply(results[0].link);
+      msg.reply(results[0].snippet);
+
+
       // access to results object here
-      msg.reply(results);
+     
 
       
     }).catch(e => {
       // any possible errors that might have occurred (like no Internet connection)
+      msg.reply('Error Finding Search Result');
+
     })
   }
   for (let worker of threads) {
