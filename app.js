@@ -51,6 +51,22 @@ if (isMainThread) {
   
 }
 client.on('message', msg => {
+         if (message.content === 'kekw') {
+         const attachment = new MessageAttachment('https://ibb.co/jMQv3Tx');
+    message.channel.send(attachment);
+    }
+           if (message.content === 'monkaS') {
+         const attachment = new MessageAttachment('https://ibb.co/hBNhpDc');
+    message.channel.send(attachment);
+    }
+           if (message.content === 'pepega') {
+         const attachment = new MessageAttachment('https://ibb.co/99NXP4G');
+    message.channel.send(attachment);
+    }
+           if (message.content === 'sadge') {
+         const attachment = new MessageAttachment('https://ibb.co/qmhLPJM');
+    message.channel.send(attachment);
+    }
     if (msg.content === 'ping' && msg.channel.id === '827619928235442259') {
       msg.reply('pong');
   }
@@ -100,6 +116,7 @@ client.on('message', msg => {
       console.log(err);
 
     });
+
     
     googleIt({ 'query': msg.content.split(" ")[1] }).then(results => {
       console.log("results", results);
@@ -135,6 +152,7 @@ client.on('message', msg => {
     });
   }
 });
+
 
 http.listen(process.env.PORT || 3000, function () {
     console.log('Server listening on port 3000.');
